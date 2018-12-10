@@ -2,7 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 from app import app
 
 # configures the app to use a postgresql database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/nba'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/nba'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
