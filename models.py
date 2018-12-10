@@ -4,7 +4,7 @@ import os
 
 # configures the app to use a postgresql database
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/nba'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://wrstbuwycwelqz:29f745665e2379ec941f50d4bedb947cb14fbe649a4dcd6ad492c861b8fba760@ec2-54-243-150-10.compute-1.amazonaws.com:5432/d6k5dfu4ouqtl2'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
