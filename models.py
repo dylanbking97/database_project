@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from app import app
+import os
 
 # configures the app to use a postgresql database
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/nba'
