@@ -82,7 +82,7 @@ def addFreeAgents():
     for fa in freeagents:
 
         # only add to database if the free agent has been signed
-        if FAstats[2]:
+        if fa[2]:
             agent = FreeAgents(name=fa[0], oldteam=fa[1], newteam=fa[2], points=fa[3],
              rebounds=fa[4], assists=fa[5], winshares=fa[6])
 
