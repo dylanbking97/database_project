@@ -14,13 +14,24 @@
     <![endif]-->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
 </head>
+<h3>Table</h3>
+    <table>
+    {%- for team in teams %}
+        <tr>
+            <td>{{ team.name }}</td>
+            <td>{{ team.wins }}</td>
+            <td>{{ team.losses }}</td>
+            <td>{{ team.points }}</td>
+        </tr>
+    {%- endfor %}
+</table>
 
 <body>
     <div class="container-full">
         <div class="row">
             <div class="col-lg-12 text-center v-center">
                 <h1>example</h1>
-                <p class="lead">lorem ipsum</p>
+                <p class="lead"> lorem ipsum</p>
                 <br>
                 <br>
                 <br>
