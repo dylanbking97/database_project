@@ -60,7 +60,7 @@ class FreeAgents(db.Model):
     newteam = db.Column(db.String(120), db.ForeignKey('teams.name'),
     nullable=False)
 
-
+# table for traded players
 class TradedPlayers(db.Model):
     __tablename__ = "tradedplayers"
     name = db.Column(db.String(120), primary_key=True)
