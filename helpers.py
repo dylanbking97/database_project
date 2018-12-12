@@ -128,31 +128,6 @@ sixers = []
 lost = []
 teams = ['ATL', 'BOS', 'NJN', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN', 'DET', 'GSW', 'HOU', 'IND', 'LAC', 'LAL', 'MEM',
         'MIA', 'MIL', 'MIN', 'NOH', 'NYK', 'OKC', 'ORL', 'PHI', 'PHO', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']
-#team = "GSW"
-#for player in trades:
-#    if(player[2] == team):
-#        sixers.append(player)
-#for player in freeagents:
-#    if(player[2] == team):
-#        sixers.append(player)
-#for player in draftpicks:
-#    if(player[2] == team):
-#        sixers.append(player)
-#for player in trades:
-#    if(player[1] == team):
-#        lost.append(player)
-#for player in freeagents:
-#    if(player[1] == team):
-#        lost.append(player)
-#for player in draftpicks:
-#    if(player[1] == team):
-#        lost.append(player)
-#for player in sixers:
-#    print(player[0], player[6])
-#print("lost:")
-#for player in lost:
-#    print(player[0], player[6])
-
 
 def addTeams():
     #Tables with each teams win-loss record, basic stats for each of the last two seasons
@@ -191,4 +166,40 @@ def addTeams():
     # commits the changes made to the database
     db.session.commit()
 
-    #print(teams201617)
+def getAllPlayers():
+
+    dps = db.session.query(DraftPicks).all()
+    fas = db.session.query(FreeAgents).all()
+    tds = db.session.query(TradedPlayers).all()
+
+    allPlayers = dps.union(fas).union(tds).all()
+
+
+
+
+
+
+#team = "GSW"
+#for player in trades:
+#    if(player[2] == team):
+#        sixers.append(player)
+#for player in freeagents:
+#    if(player[2] == team):
+#        sixers.append(player)
+#for player in draftpicks:
+#    if(player[2] == team):
+#        sixers.append(player)
+#for player in trades:
+#    if(player[1] == team):
+#        lost.append(player)
+#for player in freeagents:
+#    if(player[1] == team):
+#        lost.append(player)
+#for player in draftpicks:
+#    if(player[1] == team):
+#        lost.append(player)
+#for player in sixers:
+#    print(player[0], player[6])
+#print("lost:")
+#for player in lost:
+#    print(player[0], player[6])

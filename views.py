@@ -13,7 +13,7 @@ def index():
 # takes user request and grabs team stats
 @app.route('/team', methods=['GET'])
 def team():
-    
+
     if request.method == 'GET':
 
         # this grabs the user's search query from the HTML page into a python variable
