@@ -128,6 +128,31 @@ sixers = []
 lost = []
 teams = ['ATL', 'BOS', 'NJN', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN', 'DET', 'GSW', 'HOU', 'IND', 'LAC', 'LAL', 'MEM',
         'MIA', 'MIL', 'MIN', 'NOH', 'NYK', 'OKC', 'ORL', 'PHI', 'PHO', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']
+#team = "GSW"
+#for player in trades:
+#    if(player[2] == team):
+#        sixers.append(player)
+#for player in freeagents:
+#    if(player[2] == team):
+#        sixers.append(player)
+#for player in draftpicks:
+#    if(player[2] == team):
+#        sixers.append(player)
+#for player in trades:
+#    if(player[1] == team):
+#        lost.append(player)
+#for player in freeagents:
+#    if(player[1] == team):
+#        lost.append(player)
+#for player in draftpicks:
+#    if(player[1] == team):
+#        lost.append(player)
+#for player in sixers:
+#    print(player[0], player[6])
+#print("lost:")
+#for player in lost:
+#    print(player[0], player[6])
+
 
 def addTeams():
     #Tables with each teams win-loss record, basic stats for each of the last two seasons
@@ -166,40 +191,118 @@ def addTeams():
     # commits the changes made to the database
     db.session.commit()
 
-def getAllPlayers():
+    #print(teams201617)
 
-    dps = db.session.query(DraftPicks).all()
-    fas = db.session.query(FreeAgents).all()
-    tds = db.session.query(TradedPlayers).all()
+def getLogoURL(name):
+    name = name.upper()
+    url_catalog = {'ATL': "http://content.sportslogos.net/logos/6/220/thumbs/22091682016.gif",
+                   'BOS': "http://content.sportslogos.net/logos/6/213/thumbs/slhg02hbef3j1ov4lsnwyol5o.gif",
+                   'BRK': "http://content.sportslogos.net/logos/6/3786/thumbs/hsuff5m3dgiv20kovde422r1f.gif",
+                   'CHO': "http://content.sportslogos.net/logos/6/5120/thumbs/512019262015.gif",
+                   'CHI': "http://content.sportslogos.net/logos/6/221/thumbs/hj3gmh82w9hffmeh3fjm5h874.gif",
+                   'CLE': "http://content.sportslogos.net/logos/6/222/thumbs/22269212018.gif",
+                   'DAL': "http://content.sportslogos.net/logos/6/228/thumbs/22834632018.gif",
+                   'DEN': "http://content.sportslogos.net/logos/6/229/thumbs/22989262019.gif",
+                   'DET': "http://content.sportslogos.net/logos/6/223/thumbs/22321642018.gif",
+                   'GSW': "http://content.sportslogos.net/logos/6/235/thumbs/qhhir6fj8zp30f33s7sfb4yw0.gif",
+                   'HOU': "http://content.sportslogos.net/logos/6/230/thumbs/8xe4813lzybfhfl14axgzzqeq.gif",
+                   'IND': "http://content.sportslogos.net/logos/6/224/thumbs/22448122018.gif",
+                   'LAC': "http://content.sportslogos.net/logos/6/236/thumbs/23654622016.gif",
+                   'LAL': "http://content.sportslogos.net/logos/6/237/thumbs/uig7aiht8jnpl1szbi57zzlsh.gif",
+                   'MEM': "http://content.sportslogos.net/logos/6/231/thumbs/23143732019.gif",
+                   'MIA': "http://content.sportslogos.net/logos/6/214/thumbs/burm5gh2wvjti3xhei5h16k8e.gif",
+                   'MIL': "http://content.sportslogos.net/logos/6/225/thumbs/22582752016.gif",
+                   'MIN': "http://content.sportslogos.net/logos/6/232/thumbs/23296692018.gif",
+                   'NOP': "http://content.sportslogos.net/logos/6/4962/thumbs/496226812014.gif",
+                   'NYK': "http://content.sportslogos.net/logos/6/216/thumbs/2nn48xofg0hms8k326cqdmuis.gif",
+                   'OKC': "http://content.sportslogos.net/logos/6/2687/thumbs/khmovcnezy06c3nm05ccn0oj2.gif",
+                   'ORL': "http://content.sportslogos.net/logos/6/217/thumbs/wd9ic7qafgfb0yxs7tem7n5g4.gif",
+                   'PHI': "http://content.sportslogos.net/logos/6/218/thumbs/21870342016.gif",
+                   'PHO': "http://content.sportslogos.net/logos/6/238/thumbs/23843702014.gif",
+                   'POR': "http://content.sportslogos.net/logos/6/239/thumbs/23997252018.gif",
+                   'SAC': "http://content.sportslogos.net/logos/6/240/thumbs/24040432017.gif",
+                   'SAS': "http://content.sportslogos.net/logos/6/233/thumbs/23325472018.gif",
+                   'TOR': "http://content.sportslogos.net/logos/6/227/thumbs/22745782016.gif",
+                   'UTA': "http://content.sportslogos.net/logos/6/234/thumbs/23467492017.gif",
+                   'WAS': "http://content.sportslogos.net/logos/6/219/thumbs/21956712016.gif"
+                   }
+    if name in url_catalog:
+        return url_catalog[name]
+    else:
+        return 'no matches'
 
-    allPlayers = dps.union(fas).union(tds).all()
+def convertName(name):
+    name_catalog = {'ATL': ['ATLANTA HAWKS', 'ATLANTA', 'HAWKS', 'ATL'],
+                    'BOS': ['BOSTON CELTICS', 'BOSTON', 'CELTICS', 'BOS'],
+                    'BRK': ['NEW JERSEY NETS', 'NEW JERSEY', 'NETS', 'BROOKLYN NETS', 'BROOKLYN', 'BKN', 'BRK', 'NJN'],
+                    'CHO': ['CHARLOTTE HORNETS', 'CHARLOTTE', 'HORNETS', 'CHH', 'CHO', 'CHA'],
+                    'CHI': ['CHICAGO BULLS', 'CHICAGO', 'BULLS', 'CHI'],
+                    'CLE': ['CLEVELAND CAVALIERS', 'CLEVELAND', 'CAVALIERS','CLE'],
+                    'DAL': ['DALLAS MAVERICKS', 'DALLAS', 'MAVERICKS', 'DAL'],
+                    'DEN': ['DENVER NUGGETS', 'DENVER', 'NUGGETS', 'DEN'],
+                    'DET': ['DETROIT PISTONS', 'DETROIT', 'PISTONS', 'DET'],
+                    'GSW': ['GOLDEN STATE WARRIORS', 'GOLDEN STATE', 'WARRIORS', 'GSW'],
+                    'HOU': ['HOUSTON ROCKETS', 'HOUSTON', 'ROCKETS', 'HOU'],
+                    'IND': ['INDIANA PACERS', 'INDIANA', 'PACERS', 'IND'],
+                    'LAC': ['LOS ANGELES CLIPPERS', 'CLIPPERS', 'LAC'],
+                    'LAL': ['LOS ANGELES LAKERS', 'LOS ANGELES', 'LAKERS', 'LAL'],
+                    'MEM': ['MEMPHIS GRIZZLIES', 'MEMPHIS', 'GRIZZLIES', 'MEM'],
+                    'MIA': ['MIAMI HEAT', 'MIAMI', 'HEAT', 'MIA'],
+                    'MIL': ['MILWAUKEE BUCKS', 'MILWAUKEE', 'BUCKS', 'MIL'],
+                    'MIN': ['MINNESOTA TIMBERWOLVES', 'MINNESOTA', 'TIMBERWOLVES', 'MIN'],
+                    'NOP': ['NEW ORLEANS PELICANS', 'NEW ORLEANS', 'PELICANS', 'NOP'],
+                    'NYK': ['NEW YORK KNICKS', 'NEW YORK', 'KNICKS', 'NYK'],
+                    'OKC': ['OKLAHOMA CITY THUNDER', 'OKLAHOMA CITY', 'THUNDER', 'OKC'],
+                    'ORL': ['ORLANDO MAGIC', 'ORLANDO', 'MAGIC', 'ORL'],
+                    'PHI': ['PHILADELPHIA 76ERS', 'PHILADELPHIA', '76ERS', 'PHI'],
+                    'PHO': ['PHOENIX SUNS', 'PHOENIX', 'SUNS', 'PHO', 'PHX'],
+                    'POR': ['PORTLAND TRAIL BLAZERS', 'PORTLAND', 'TRAIL BLAZERS', 'POR'],
+                    'SAC': ['SACRAMENTO KINGS', 'SACRAMENTO', 'KINGS', 'SAC'],
+                    'SAS': ['SAN ANTONIO SPURS', 'SAN ANTONIO', 'SPURS', 'SAS'],
+                    'TOR': ['TORONTO RAPTORS', 'TORONTO', 'RAPTORS', 'TOR'],
+                    'UTA': ['UTAH JAZZ', 'UTAH', 'JAZZ', 'UTA'],
+                    'WAS': ['WASHINGTON WIZARDS', 'WASHINGTON', 'WIZARDS', 'WAS']
+                    }
+    name = name.upper()
+    for code, matches in name_catalog.items():
+        if name in matches:
+            return code
+    return 'no matches'
 
-
-
-
-
-
-#team = "GSW"
-#for player in trades:
-#    if(player[2] == team):
-#        sixers.append(player)
-#for player in freeagents:
-#    if(player[2] == team):
-#        sixers.append(player)
-#for player in draftpicks:
-#    if(player[2] == team):
-#        sixers.append(player)
-#for player in trades:
-#    if(player[1] == team):
-#        lost.append(player)
-#for player in freeagents:
-#    if(player[1] == team):
-#        lost.append(player)
-#for player in draftpicks:
-#    if(player[1] == team):
-#        lost.append(player)
-#for player in sixers:
-#    print(player[0], player[6])
-#print("lost:")
-#for player in lost:
-#    print(player[0], player[6])
+def getLongName(name):
+    name_catalog = {'ATL': ['ATLANTA HAWKS', 'ATLANTA', 'HAWKS', 'ATL'],
+                    'BOS': ['BOSTON CELTICS', 'BOSTON', 'CELTICS', 'BOS'],
+                    'BRK': ['NEW JERSEY NETS', 'NEW JERSEY', 'NETS', 'BROOKLYN NETS', 'BROOKLYN', 'BKN', 'BRK', 'NJN'],
+                    'CHO': ['CHARLOTTE HORNETS', 'CHARLOTTE', 'HORNETS', 'CHH', 'CHO', 'CHA'],
+                    'CHI': ['CHICAGO BULLS', 'CHICAGO', 'BULLS', 'CHI'],
+                    'CLE': ['CLEVELAND CAVALIERS', 'CLEVELAND', 'CAVALIERS', 'CLE'],
+                    'DAL': ['DALLAS MAVERICKS', 'DALLAS', 'MAVERICKS', 'DAL'],
+                    'DEN': ['DENVER NUGGETS', 'DENVER', 'NUGGETS', 'DEN'],
+                    'DET': ['DETROIT PISTONS', 'DETROIT', 'PISTONS', 'DET'],
+                    'GSW': ['GOLDEN STATE WARRIORS', 'GOLDEN STATE', 'WARRIORS', 'GSW'],
+                    'HOU': ['HOUSTON ROCKETS', 'HOUSTON', 'ROCKETS', 'HOU'],
+                    'IND': ['INDIANA PACERS', 'INDIANA', 'PACERS', 'IND'],
+                    'LAC': ['LOS ANGELES CLIPPERS', 'CLIPPERS', 'LAC'],
+                    'LAL': ['LOS ANGELES LAKERS', 'LOS ANGELES', 'LAKERS', 'LAL'],
+                    'MEM': ['MEMPHIS GRIZZLIES', 'MEMPHIS', 'GRIZZLIES', 'MEM'],
+                    'MIA': ['MIAMI HEAT', 'MIAMI', 'HEAT', 'MIA'],
+                    'MIL': ['MILWAUKEE BUCKS', 'MILWAUKEE', 'BUCKS', 'MIL'],
+                    'MIN': ['MINNESOTA TIMBERWOLVES', 'MINNESOTA', 'TIMBERWOLVES', 'MIN'],
+                    'NOP': ['NEW ORLEANS PELICANS', 'NEW ORLEANS', 'PELICANS', 'NOP'],
+                    'NYK': ['NEW YORK KNICKS', 'NEW YORK', 'KNICKS', 'NYK'],
+                    'OKC': ['OKLAHOMA CITY THUNDER', 'OKLAHOMA CITY', 'THUNDER', 'OKC'],
+                    'ORL': ['ORLANDO MAGIC', 'ORLANDO', 'MAGIC', 'ORL'],
+                    'PHI': ['PHILADELPHIA 76ERS', 'PHILADELPHIA', '76ERS', 'PHI'],
+                    'PHO': ['PHOENIX SUNS', 'PHOENIX', 'SUNS', 'PHO', 'PHX'],
+                    'POR': ['PORTLAND TRAIL BLAZERS', 'PORTLAND', 'TRAIL BLAZERS', 'POR'],
+                    'SAC': ['SACRAMENTO KINGS', 'SACRAMENTO', 'KINGS', 'SAC'],
+                    'SAS': ['SAN ANTONIO SPURS', 'SAN ANTONIO', 'SPURS', 'SAS'],
+                    'TOR': ['TORONTO RAPTORS', 'TORONTO', 'RAPTORS', 'TOR'],
+                    'UTA': ['UTAH JAZZ', 'UTAH', 'JAZZ', 'UTA'],
+                    'WAS': ['WASHINGTON WIZARDS', 'WASHINGTON', 'WIZARDS', 'WAS']
+                    }
+    name = name.upper()
+    if name in name_catalog:
+        return name_catalog[name][0]
+    else:
+        return 'no matches'
