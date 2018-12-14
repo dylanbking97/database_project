@@ -129,25 +129,35 @@ input[type=text] {
         TEAM STAT ANALYSIS:
         <img src={{team_logo_url}}>
         <br>
-        {{team_long_name}}, team_row.name
+        {{team_long_name}}
         <br>
 
-        expected points this season: {{exp_pts}}<br>
-        points last season: {{pts}}<br>
-        expected rebounds this season: {{exp_rbs}}<br>
-        rebounds last season: {{rbs}}<br>
-        expected assists this season: {{exp_asts}}<br>
-        assists last season: {{asts}}<br>
-        expected wins this season: {{exp_wins}}<br>
-        wins last season: {{wins}}<br>
+        Expected Points Per Game: {{exp_pts}}<br>
+        PPG (2017-18): {{pts}}<br>
+        Expected Rebounds Per Game: {{exp_rbs}}<br>
+        RPG (2017-18): {{rbs}}<br>
+        Expected Assists Per Game: {{exp_asts}}<br>
+        APG (2017-18): {{asts}}<br>
+        Expected Record: {{exp_wins}}-{{exp_loss}}<br>
+        Record (2017-18): {{wins}}-{{losses}}<br>
+        <br>
+        Players Lost:
+        {%for player in lost_players%}
+            {{player}}
+        {%endfor%}<br>
+
+        Players Gained:
+        {%for player in gained_players%}
+            {{player}}
+        {%endfor%}
         <br>
 
         <!--
         team_row = Teams.query.filter_by(name=selectedTeam),
                 team_logo_url=getLogoURL(selectedTeam),
                 team_long_name=getLongName(selectedTeam),
-                #lost_players=lost_players,
-                #gained_players=gained_players,
+                lost_players=lost_players,
+                gained_players=gained_players,
                 exp_pts=expectedPoints,
                 pts=oldPoints,
                 exp_rbs=expectedAssists,

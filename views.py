@@ -121,6 +121,7 @@ def team():
             expectedWS = round(oldWS + newWS)
 
             expectedLS = 82 - expectedWS
+            oldLS = 82-oldWS
             '''
 
             lost_players = [('Timofey Mozgov', 'BRK', 'ORL', '5.2', '4.2', '3.2', '0.4'), ('Dwight Howard', 'CHO', 'BRK', '16.6', '12.5', '1.3', '6.8')]
@@ -133,6 +134,22 @@ def team():
             '''
 
             #TODO: grouping of lost and gained players. for now just send in each group
+            gained_players =[]
+            lost_players =[]
+            for player in FAsGained:
+                name = (player.name)
+                gained_players.append(name)
+            for player in TDsGained:
+                name = (player.name)
+                gained_players.append(name)
+            for player in FAsLost:
+                name = (player.name)
+                lost_players.append(name)
+            for player in TDsLost:
+                name = (player.name)
+                lost_players.append(name)
+            #lost_players = [('Timofey Mozgov', 'BRK', 'ORL', '5.2', '4.2', '3.2', '0.4'), ('Dwight Howard', 'CHO', 'BRK', '16.6', '12.5', '1.3', '6.8')]
+
 
             # this returns the appropriate template & queries the table
             return render_template(
@@ -140,17 +157,18 @@ def team():
                 team_row = Teams.query.filter_by(name=selectedTeam),
                 team_logo_url=getLogoURL(selectedTeam),
                 team_long_name=getLongName(selectedTeam),
-                #lost_players=lost_players,
-                #gained_players=gained_players,
+                lost_players=lost_players,
+                gained_players=gained_players,
                 exp_pts=expectedPoints,
                 pts=oldPoints,
-                exp_rbs=expectedAssists,
+                exp_rbs=expectedRebounds,
                 rbs=oldRebounds,
                 exp_asts=expectedAssists,
                 asts=oldAssists,
                 exp_wins=expectedWS,
                 wins=oldWS,
                 exp_loss=expectedLS,
+                losses=oldLS,
                 FAsGained=FAsGained,
                 FAsLost=FAsLost,
                 TDsGained=TDsGained,
