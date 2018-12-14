@@ -272,7 +272,7 @@ def convertName(name):
 def getLongName(name):
     name_catalog = {'ATL': ['ATLANTA HAWKS', 'ATLANTA', 'HAWKS', 'ATL'],
                     'BOS': ['BOSTON CELTICS', 'BOSTON', 'CELTICS', 'BOS'],
-                    'BRK': ['NEW JERSEY NETS', 'NEW JERSEY', 'NETS', 'BROOKLYN NETS', 'BROOKLYN', 'BKN', 'BRK', 'NJN'],
+                    'BRK': ['BROOKLYN NETS', 'NEW JERSEY NETS', 'NEW JERSEY', 'NETS', 'BROOKLYN', 'BKN', 'BRK', 'NJN'],
                     'CHO': ['CHARLOTTE HORNETS', 'CHARLOTTE', 'HORNETS', 'CHH', 'CHO', 'CHA'],
                     'CHI': ['CHICAGO BULLS', 'CHICAGO', 'BULLS', 'CHI'],
                     'CLE': ['CLEVELAND CAVALIERS', 'CLEVELAND', 'CAVALIERS', 'CLE'],
