@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>NBData</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+
+<style>
+h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  color:#202020;
+}
+
+.section {
+  margin-bottom: 0px;
+}
+
+.banner {
+  background-image: url(//www.interbasket.net/wp-content/uploads/slams-full-list-of-100-top-nba-players.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+  padding: 0 0px;
+  text-align: center;
+  width: 100%;
+}
+
+.banner-inner {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  background-color: #505050;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: #FFFFFF;
+  border: 2px solid #505050;
+  padding: 10px;
+  font-size: 120px;
+  text-align: center;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+/*from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_searchbar3*/
+
+.search-container {
+  position: relative;
+  top: 42%;
+}
+
+input[type=text] {
+  padding: 6px;
+  margin-bottom: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background: #ccc;
+}
+</style>
+
+    <body>
+
+        <div>
+            <section class="section banner">
+                <div class="banner-inner" style="font-size:0px">
+                    <a href="./">
+                        <h1 style="display:inline-block;color:#17408B;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                            NB
+                        </h1><!-->
+                        <h1 style="display:inline-block;color:#C9082A;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                            D
+                        </h1><!-->
+                        <h1 style="display:inline-block;color:#17408B;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                            A
+                        </h1><!-->
+                        <h1 style="display:inline-block;color:#C9082A;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                            TA
+                        </h1>
+                    </a>
+                </div>
+                <br>
+                <div class="search-container">
+                    <form action="./team?team=">
+                        <input type="text" placeholder="Search your team" name="team">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        TEAM STAT ANALYSIS:
+        <img src={{team_logo_url}}>
+        <br>
+        {{team_long_name}}, team_row.name
+        <br>
+
+        expected points this season: {{exp_pts}}<br>
+        points last season: {{pts}}<br>
+        expected rebounds this season: {{exp_rbs}}<br>
+        rebounds last season: {{rbs}}<br>
+        expected assists this season: {{exp_asts}}<br>
+        assists last season: {{asts}}<br>
+        expected wins this season: {{exp_wins}}<br>
+        wins last season: {{wins}}<br>
+        <br>
+
+        <!--
+        team_row = Teams.query.filter_by(name=selectedTeam),
+                team_logo_url=getLogoURL(selectedTeam),
+                team_long_name=getLongName(selectedTeam),
+                #lost_players=lost_players,
+                #gained_players=gained_players,
+                exp_pts=expectedPoints,
+                pts=oldPoints,
+                exp_rbs=expectedAssists,
+                rbs=oldRebounds,
+                exp_asts=expectedAssists,
+                asts=oldAssists,
+                expt_wins=expectedWS,
+                wins=oldWS,
+                expt_loss=expectedLS,
+                FAsGained=FAsGained,
+                FAsLost=FAsLost,
+                TDsGained=TDsGained,
+                TDsLost=TDsLost,
+                DPs=DPs -->
+
+        <!-- /container full -->
+
+
+        <!-- script references -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    </body>
+
+</html>
