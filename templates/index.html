@@ -18,12 +18,32 @@
     <table>
     {%- for team in teams %}
         <tr>
-            <td>{{ team.name }}</td>
+            <td>{{ team.name }} </td>
             <td>{{ team.wins }}</td>
             <td>{{ team.losses }}</td>
-            <td>{{ team.points }}</td>
+            <td>{{ team.points }}/</td>
+            <td> {{ oldPoints }}/ </td>
+            <td> {{ expectedPoints }}/ </td>
+            <td> {{ oldRebounds }}/ </td>
+            <td> {{ expectedRebounds }}/ </td>
+            <td> {{ oldAssists }}/ </td>
+            <td> {{ expectedAssists }}/ </td>
+            <td> {{ oldWS }}/ </td>
+            <td> {{ expectedWS }}/ </td>
+            <td> {{ expectedLS }}/ </td>
+            <!-- <script language="javascript">
+                function addNumbers()
+                {
+                  var points=0;
+                        for player in DPs
+                          points += player.points;
+                  document.getElementById("demo") = points
+                }
+            </script> -->
+
         </tr>
     {%- endfor %}
+
 </table>
 
 <body>

@@ -172,7 +172,7 @@ def getAllPlayers():
     fas = db.session.query(FreeAgents).all()
     tds = db.session.query(TradedPlayers).all()
 
-    allPlayers = dps.union(fas).union(tds).all()
+    allPlayers = fas.union(tds)#.union(dps).all()
 
 
 
