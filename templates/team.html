@@ -48,17 +48,16 @@ h2 {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  background-color: #505050;
-  padding: 10px;
+  grid-template-columns: auto auto;
+  background-color: #777;
+  padding: 0px;
 }
 
 .grid-item {
-  background-color: #FFFFFF;
-  border: 2px solid #505050;
-  padding: 10px;
-  font-size: 120px;
-  text-align: center;
+  border: 10px solid #777;
+  padding: 0px;
+  float: left;
+  background-color: #777;
 }
 
 .topnav {
@@ -94,92 +93,160 @@ input[type=text] {
 .search-container button:hover {
   background: #ccc;
 }
+
+table, td, th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: EEE;
+}
+
+th, td {
+  padding: 15px;
+  font-family:Helvetica;
+}
+
 </style>
 
-    <body>
+<body>
 
-        <div>
-            <section class="section banner">
-                <div class="banner-inner" style="font-size:0px">
-                    <a href="./">
-                        <h1 style="display:inline-block;color:#17408B;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
-                            NB
-                        </h1><!-->
-                        <h1 style="display:inline-block;color:#C9082A;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
-                            D
-                        </h1><!-->
-                        <h1 style="display:inline-block;color:#17408B;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
-                            A
-                        </h1><!-->
-                        <h1 style="display:inline-block;color:#C9082A;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
-                            TA
-                        </h1>
-                    </a>
+    <div>
+        <section class="section banner">
+            <div class="banner-inner" style="font-size:0px">
+                <a href="./">
+                    <h1 style="display:inline-block;color:#17408B;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                        NB
+                    </h1><!-->
+                    <h1 style="display:inline-block;color:#C9082A;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                        D
+                    </h1><!-->
+                    <h1 style="display:inline-block;color:#17408B;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                        A
+                    </h1><!-->
+                    <h1 style="display:inline-block;color:#C9082A;font-weight:bold;font-family:Impact;font-weight:bold;font-size:80px;margin-bottom:20px">
+                        TA
+                    </h1>
+                </a>
+            </div>
+            <br>
+            <div class="search-container">
+                <form action="./team?team=">
+                    <input type="text" placeholder="Search your team" name="team">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div style="background-color:#777:">
+        <div style="background-color:#777">
+            <div style="background-color:#777;text-align:center">
+                <h1 style="font-weight:bold;font-family:Impact;padding-top:15px;padding-bottom:15px;font-size:40px;color:#EEE">
+                    TEAM STATISTICS AND ANALYSIS
+                </h1>
+                <div style="item-align:center;background-color:#FFF;padding-top:10px;padding-bottom:10px">
+                    <img src={{team_logo_url}}>
                 </div>
-                <br>
-                <div class="search-container">
-                    <form action="./team?team=">
-                        <input type="text" placeholder="Search your team" name="team">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-            </section>
+                <h1 style="font-size:20px;padding-bottom:15px;font-family:Helvetica;color:#EEE">
+                    {{team_long_name}}
+                </h1>
+            </div>
         </div>
 
-        TEAM STAT ANALYSIS:
-        <img src={{team_logo_url}}>
-        <br>
-        {{team_long_name}}
-        <br>
+        <table style="background-color:#EEE">
+            <tr>
+                <th>Measure</th>
+                <th>Last Season Values(2017-2018)</th>
+                <th>Current Season Predictions</th>
+            </tr>
+            <tr>
+                <td><b>Points Per Game (PPG)</b></td>
+                <td>{{pts}}</td>
+                <td>{{exp_pts}}</td>
+            </tr>
+            <tr>
+                <td><b>Rebounds Per Game (RPG)</b></td>
+                <td>{{rbs}}</td>
+                <td>{{exp_rbs}}</td>
+            </tr>
+            <tr>
+                <td><b>Assists Per Game (APG)</b></td>
+                <td>{{asts}}</td>
+                <td>{{exp_asts}}</td>
+            </tr>
+            <tr>
+                <td><b>Win-Loss Record</b></td>
+                <td>{{wins}} - {{losses}}</td>
+                <td>{{exp_wins}} - {{exp_loss}}</td>
+            </tr>
+        </table>
 
-        Expected Points Per Game: {{exp_pts}}<br>
-        PPG (2017-18): {{pts}}<br>
-        Expected Rebounds Per Game: {{exp_rbs}}<br>
-        RPG (2017-18): {{rbs}}<br>
-        Expected Assists Per Game: {{exp_asts}}<br>
-        APG (2017-18): {{asts}}<br>
-        Expected Record: {{exp_wins}}-{{exp_loss}}<br>
-        Record (2017-18): {{wins}}-{{losses}}<br>
-        <br>
-        Players Lost:
-        {%for player in lost_players%}
-            {{player}}
-        {%endfor%}<br>
+        <div style="background-color:#777">
+            <br>
+        </div>
 
-        Players Gained:
-        {%for player in gained_players%}
-            {{player}}
-        {%endfor%}
-        <br>
+        <div class="grid-container">
+            <div class="grid-item">
+                <table>
+                    <tr style="background-color:#EEE">
+                        <th>Players Acquired:</th>
+                    </tr>
+                    {%for player in gained_players%}
+                    <tr style="background-color:#EEE">
+                        <td>{{player}}</td>
+                    </tr>
+                    {%endfor%}
+                </table>
 
-        <!--
-        team_row = Teams.query.filter_by(name=selectedTeam),
-                team_logo_url=getLogoURL(selectedTeam),
-                team_long_name=getLongName(selectedTeam),
-                lost_players=lost_players,
-                gained_players=gained_players,
-                exp_pts=expectedPoints,
-                pts=oldPoints,
-                exp_rbs=expectedAssists,
-                rbs=oldRebounds,
-                exp_asts=expectedAssists,
-                asts=oldAssists,
-                expt_wins=expectedWS,
-                wins=oldWS,
-                expt_loss=expectedLS,
-                FAsGained=FAsGained,
-                FAsLost=FAsLost,
-                TDsGained=TDsGained,
-                TDsLost=TDsLost,
-                DPs=DPs -->
+            </div>
+            <div class="grid-item">
+                <table>
+                    <tr style="background-color:#EEE">
+                        <th>Players Lost:</th>
+                    </tr>
+                    {%for player in lost_players%}
+                    <tr style="background-color:#EEE">
+                        <td>{{player}}</td>
+                    </tr>
+                    {%endfor%}
+                </table>
 
-        <!-- /container full -->
+            </div>
+        </div>
+    </div>
 
 
-        <!-- script references -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    </body>
+    <!--
+    team_row = Teams.query.filter_by(name=selectedTeam),
+            team_logo_url=getLogoURL(selectedTeam),
+            team_long_name=getLongName(selectedTeam),
+            lost_players=lost_players,
+            gained_players=gained_players,
+            exp_pts=expectedPoints,
+            pts=oldPoints,
+            exp_rbs=expectedAssists,
+            rbs=oldRebounds,
+            exp_asts=expectedAssists,
+            asts=oldAssists,
+            expt_wins=expectedWS,
+            wins=oldWS,
+            expt_loss=expectedLS,
+            FAsGained=FAsGained,
+            FAsLost=FAsLost,
+            TDsGained=TDsGained,
+            TDsLost=TDsLost,
+            DPs=DPs -->
+
+    <!-- /container full -->
+
+    <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
 
 </html>
