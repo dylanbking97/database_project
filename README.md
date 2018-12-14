@@ -29,4 +29,4 @@ The most interesting factor of our project is our predictions - based on players
 
 # Live Site URL:
 
-[nba-visualizer.herokuapp.com](nba-visualizer.herokuapp.com)
+[nba-visualizer.herokuapp.com](https://nba-visualizer.herokuapp.com)
