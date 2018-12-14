@@ -9,6 +9,10 @@ Most interestingly, however, we can use our data to be a predictor of a team’s
 
 There are a number of technical challenges involved with the project. One of the most prominent is actually getting the data, which we were able to accomplish by scraping the web, specifically Basketball-Reference.com. Without web scraping, we would have spent as much time finding and entering raw data as we did actually coding.
 
+We scraped the data into python objects and then stored them in postgresql databases on amazon web services with sqlalchemy.
+
+The scraping functions and code can be found in 'scrape.py' as well as 'helpers.py'
+
 # Database design and implementation:
 
 Our table design meets the criteria for the third normal form (3NF). Each column in our table is dependent only on its primary key. These tables include Teams(name, wins, losses, points, rebounds, assists), DraftPicks(name, year, team, points, rebounds, assists, winshares), FreeAgents(name, points, rebounds, assists, winshares, oldteam, newteam), and TradedPlayers(name, points, rebounds, assists, winshares, oldteam, newteam).
@@ -27,4 +31,4 @@ The most interesting factor of our project is our predictions - based on players
 
 # Live Site URL:
 
-[nba-visualizer.herokuapp.com](nba-visualizer.herokuapp.com)
+[nba-visualizer.herokuapp.com](https://nba-visualizer.herokuapp.com)
