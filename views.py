@@ -1,9 +1,10 @@
 from app import app
 from models import db, Teams
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from helpers import *
 
 # Base page
+@app.route('/redirect')
 @app.route('/')
 def index():
     return render_template(
@@ -35,10 +36,7 @@ def team():
         '''
         team = convertName(team)
         if team == 'no matches':
-            render_template(
-                'index.html',
-                teams=Teams.query.all()
-            )
+            return redirect('/redirect')
 
         else:
             selectedTeam = team
